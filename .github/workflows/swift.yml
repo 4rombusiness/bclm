@@ -8,18 +8,19 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:   # 👈 Enables running manually from GitHub GUI
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: make build
+      - uses: actions/checkout@v3
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: bclm
-        path: .build/apple/Products/Release/bclm
+      - name: Build
+        run: make build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: bclm
+          path: .build/apple/Products/Release/bclm
